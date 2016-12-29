@@ -63,6 +63,26 @@ button {
     border-radius: 50%;
 }
 
+@-webkit-keyframes blur-animation {
+  0% {
+    filter: blur(10px) saturate(.7) brightness(.9) grayscale(100%) opacity(0.1);
+
+  }
+  100% {
+    filter: blur(0px) saturate(1.0) brightness(1.0) grayscale(0%) opacity(1.0);
+  }
+}
+
+html.background-blur-animation .backgrounds {
+   -webkit-animation-name: blur-animation;
+   -webkit-animation-duration: 15s;
+   -webkit-animation-iteration-count: 1;
+   -webkit-animation-direction: alternate;
+   -webkit-animation-timing-function: ease-out;
+   -webkit-animation-fill-mode: forwards;
+   -webkit-animation-delay: 0s;
+ }
+
 .reveal {
   font-family: "Interstate", sans-serif;
   font-size: 36px;

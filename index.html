@@ -27,6 +27,8 @@
                 <img width="125px" src="images/callista-logo-t.gif" />
             </div>
 			<div class="slides">
+
+				<!-- Introduction -->
 				<section>
  					<h1>Serverless</h1>
 	                <p>
@@ -35,6 +37,8 @@
 	                    </small>
 					</p>
 				</section>
+
+				<!-- Serverless -->
 				<section>
 					<h3>Serverless</h3>
 					<br>
@@ -62,6 +66,8 @@
 						<img style="border:none;border-radius:5px" src="images/webtask-logo.png" />
 					</div>
 				</section>
+
+				<!-- Servers -->
 				<section>
 					<h3>Servers innebär</h3>
 					<br>
@@ -72,6 +78,8 @@
 						<li><span class="c-blue">Sämre utnyttjandegrad</span> - för grovkornigt för micro-services </li>
 					</ul>
 				</section>
+
+				<!-- Kostnader -->
 				<section>
 					<h3>Kostnadsjämförelse</h3>
 					<br>
@@ -93,6 +101,8 @@
 					<br><br>
 					<p class="fragment" style="border-radius:5px;background:#A40613;color:white;font-weight:bold">Servers är ca 60 ggr dyrare!!!</p>
 				</section>
+
+				<!-- Arkitekur -->
 				<section class="full">
 					<h3>Arkitektur - exempel</h3>
 					<div>
@@ -116,6 +126,8 @@
 					<br>
 					<div style="text-align:center;border-radius:5px;background:#434491;color:white">AWS tillhandahåller 70 olika blueprints</div>
 				</section>
+
+				<!-- IoT Button -->
 				<section  class="full">
 					<section>
 						<h3>Demo - IoT Button</h3>					
@@ -130,7 +142,8 @@
 IoTEventListener.initialize(function(data) {
 		console.log("clicked: " + data.clickType);
 		switch (data.clickType) {
-		...
+			...
+		}
 	}
 }
 						</code></pre>
@@ -172,6 +185,64 @@ def lambda_handler(event, context):
     client.publish(topic='<mark>iotprocessed</mark>', qos=1, payload=json.dumps(xevent))
 						</code></pre>
 					</section>
+				</section>
+
+				<!-- Fördelar -->
+				<section>
+					<h3>Applikationsarkitektur</h3>
+					<ul>
+						<li>Slipper hantera icke-funktionalitet som ex:</li>
+						<ul>
+							<li>CPU, cores</li>
+							<li>Trådar</li>
+							<li>Policy och roller</li>
+							<li>Uppgraderingar</li>
+							<li>Elastisk auto-skalning och lastbalansering</li>
+							<li>Konfiguration</li>
+							<li>Distribuerad spårning, loggning och instrumentering</li>
+							<li>Säkerhetsaspekter som DDoS etc.</li>
+							<li>Upprätthålla produktionslika test- och stagemiljöer</li>
+						</ul>
+						<li>Serverless är "de enda" plattformarna för micro-service arkitektur.</li>
+					</ul>
+					<br><br>
+					<div style="text-align:center;border-radius:5px;background:#434491;color:white">Dvs. mer fokus på funktionalitet!</div>
+				</section>
+
+				<!-- Nackdelar -->
+				<section>
+					<h3>Avvakta med att gå "all-in"</h3>
+					<ul style="font-size: 34px">
+						<!-- <li>Högt på hype-kurvan, dvs. en viss tillnyktring förväntas komma</li> -->
+						<li>Komplicerad arkitektur som kräver "vassa" DevOps team</li>
+						<li>Risk för så kallade "nanotjänster"</li>
+						<ul style="font-size: 26px">
+							<li>A nanoservice is a service whose overhead (communications, maintenance, and so on) outweighs its utility</li>
+						</ul>
+						<li>Det saknas verktyg och mönster för att paketera och driftsätta en grupp av funktioner (applikation)</li>
+						<li>Leverantören kontrollerar och styr plattformen</li>
+						<li>Inlåsningseffekter på grund av beroenden till såväl plattformsspecifika SDK som stödtjänster</li>
+						<li>Öppnar upp fler säkerhetsrisker som måste hanteras</li>
+						<!-- <li>Mer logik på klienten (risk för redundans över kanaler)</li> -->
+						<li>Konfiguration, lambda erbjuder inget sätt att externalisera konfiguration</li>
+						<li>AWS SLA
+						<ul style="font-size: 26px">
+							<li>Max samtidiga exekveringar är per konto och inte miljö</li>
+							<li>Max exekveringstid (5 min)</li>
+							<li>JVM startup (latens)</li>
+						</ul>
+					</ul>
+				</section>
+
+				<!-- Demo -->
+				<!-- 
+				<section class="full" data-background="images/stephenwhite.jpg" data-state="background-blur-animation">
+				-->
+				<section class="full">
+					<h1>&nbsp;&nbsp;&nbsp;DEMO</h1>
+					<div style="position: absolute; bottom: 0; margin: 10px auto;">
+						<img style="border:none;border-radius:5px;" src="images/serverless-logo.png" />
+					</div>
 				</section>
 			</div>
 		</div>
