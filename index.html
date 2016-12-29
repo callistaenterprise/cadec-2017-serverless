@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Serverless</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/callista.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div style="float: right; margin: 10px  auto;">
+                <img width="125px" src="images/callista-logo-t.gif" />
+            </div>
+			<div class="slides">
+				<section>
+ 					<h1>Serverless</h1>
+	                <p>
+	                    <small>
+	                           	CADEC 2017&nbsp;-&nbsp;<a href="mailto:peter.larsson@callistaenterprise.se">Peter Larsson</a>,&nbsp;<a href="mailto:stephen.white@callistaenterprise.se">Stephen White</a>
+	                    </small>
+					</p>
+				</section>
+				<section>
+					<h3>Serverless</h3>
+					<br>
+					<div>
+						<q cite="https://aws.amazon.com/lambda">
+							&ldquo;...lets you run code without provisioning or <span class="c-blue">managing servers</span>.&rdquo; <br> <br>
+							&ldquo;...you pay <span class="c-blue">only for the compute time</span> you consume - there is no charge when your code is not running.&rdquo; <br> <br>
+							&ldquo;...you can run code for virtually any type of application or backend service - all with <span class="c-blue">zero administration</span>.&rdquo;
+						</q>
+						<br>
+						<p>
+							<small style="float: right"><a href="https://aws.amazon.com/lambda">- Amazon AWS Lambda</a></small>
+						</p>
+					</div>
+					<div class="c-blue">
+						<br> <br>
+						FaaS Providers
+					</div>
+					<div>
+						<img style="border:none;border-radius:5px" src="images/aws-lambda-logo.png" />&nbsp;
+						<img style="border:none;border-radius:5px" src="images/azure-functions-logo.png" />&nbsp;
+						<img style="border:none;border-radius:5px" src="images/openwhisk-lambda-logo.png" />&nbsp;
+						<img style="border:none;border-radius:5px" src="images/google-cloud-logo.png" />&nbsp;
+						<img style="border:none;border-radius:5px" src="images/ironio-logo.png" />&nbsp;
+						<img style="border:none;border-radius:5px" src="images/webtask-logo.png" />
+					</div>
+				</section>
+				<section>
+					<h3>Servers innebär</h3>
+					<br>
+					<ul>
+						<li><span class="c-blue">Adminstration</span> - nätinfrastruktur, orkestrering, autoskalning</li> <br>
+						<li><span class="c-blue">Kostnader</span> - varje miljö kräver ett minimum av aktiva servers</li> <br>
+						<li><span class="c-blue">Underhåll</span> - servers måste hållas up-to-date</li> <br>
+						<li><span class="c-blue">Sämre utnyttjandegrad</span> - för grovkornigt för micro-services </li>
+					</ul>
+				</section>
+				<section>
+					<h3>Kostnadsjämförelse</h3>
+					<br>
+					<table>
+						<thead>
+							<th colspan="2">16 000 transaktioner per dag @ 200ms per trans. </th>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="border-bottom: none">2x EC2 (c3.large)</td>
+								<td style="border-bottom: none">$ 2.97</td>
+							</tr>
+							<tr>
+								<td>Lambda (1 GB)</t>
+								<td>$ 0.05</td>
+							</tr>
+						</tbody>
+					</table>
+					<br><br>
+					<p class="fragment" style="border-radius:5px;background:#A40613;color:white;font-weight:bold">Servers är ca 60 ggr dyrare!!!</p>
+				</section>
+				<section class="full">
+					<h3>Arkitektur - exempel</h3>
+					<div>
+						Serverless är typsikt eventdrivet för Mobil-, Webb- och IoT- backendtjänster.
+						<br><br>
+					</div>
+					<div>
+						<div class="stretch fragment" style="float: left">
+							<small class="c-blue">Exempel: Skapa tumnagel av bild</small>
+							<div>
+								<img style="border:none;border-radius:10px" src="images/lamdba-s3-trigger-example.png" />
+							</div>
+						</div>
+						<div class="fragment" style="float: center">
+							<small class="c-blue">Exempel: Bearbeta en dataström</small>
+							<div>
+								<img style="border:none;border-radius:10px" src="images/lamdba-kinesis-trigger-example.png" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div style="text-align:center;border-radius:5px;background:#434491;color:white">AWS tillhandahåller 70 olika blueprints</div>
+				</section>
+				<section  class="full">
+					<section>
+						<h3>Demo - IoT Button</h3>					
+						<div id="event-div">
+							<img style="border:none;border-radius:10px" src="images/lamdba-iot-button-trigger-example.png" />
+						</div>
+					</section>
+					<section>
+						<h3>Paho MQTT/Websocket lyssnare</h3>
+						<pre><code class="javascript" data-trim>
+// html page callback, fragments...
+IoTEventListener.initialize(function(data) {
+		console.log("clicked: " + data.clickType);
+		switch (data.clickType) {
+		...
+	}
+}
+						</code></pre>
+						<pre><code class="javascript" data-trim data-noescape>
+// client code, fragments...
+IoTEventListener.initialize = function(cb) {
+	var client = new Paho.MQTT.Client(requestUrl, clientId);
+	client.onMessageArrived = function (message) {
+	        console.log("msg arrived: " +  message.payloadString);
+	        var data = JSON.parse(message.payloadString);
+	        cb(data)
+	};
+...
+	client.subscribe("<mark>iotprocessed</mark>");
+						</code></pre>
+						<div>
+							<img style="border:none;border-radius:5px" src="images/eclipse-paho-logo.png" />
+						</div>
+					</section>
+					<section>
+						<h3>Python Lambda Code (MQTT)</h3>
+						<pre><code data-trim data-noescape>
+import boto3, json, socket, datetime
+
+client = boto3.client('iot-data', region_name='eu-west-1')
+
+def ip():
+    return [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+
+def lambda_handler(event, context):
+    xevent = {
+            'title': 'Demo event assembled by lambda python function',
+            'timestamp': str(datetime.datetime.utcnow()),
+            'ipAddress': ip(),
+            'serialNumber': event['serialNumber'],
+            'batteryVoltage': event['batteryVoltage'],
+            'clickType': event['clickType']
+        }
+    client.publish(topic='<mark>iotprocessed</mark>', qos=1, payload=json.dumps(xevent))
+						</code></pre>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.7.15/aws-sdk.min.js" type="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<script src="js/aws-util.js" type="text/javascript"></script>
+		<script src="js/wss-mqtt.js" type="text/javascript"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			$(function() {
+	            Reveal.initialize({
+	            	width: "100%",
+	            	height:"100%",
+	                controls: false,
+	                progress: false,
+					history: true,
+	                center: true,
+					slideNumber: true,
+	                transition: 'convex', // none/fade/slide/convex/concave/zoom
+					transitionSpeed: 'slow',
+					// Optional reveal.js plugins
+	                dependencies: [
+	                            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+								{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+								{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+								{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+	                            { src: 'plugin/zoom-js/zoom.js', async: true },
+	                            { src: 'plugin/notes/notes.js', async: true }
+	                    ]
+                });
+
+
+                var eventLog = []
+
+                var renderTable = function(data) {
+                	var table = $("<table>");
+                	table.append($("<thead>").html("<tr><th class='c-blue' colspan='2'>Cool! Event Received</th></tr>"));
+                	var body = $("<tbody>");
+                	body.append($("<tr>").html("<td>From Device</td><td>" + data.serialNumber + "</td>"));                	
+                	body.append($("<tr>").html("<td>Battery</td><td>" + data.batteryVoltage + "</td>"));
+                	body.append($("<tr>").html("<td>Timestamp (UTC)</td><td>" + data.timestamp + "</td>"));
+                	body.append($("<tr>").html("<td>Click Type</td><td>" + data.clickType + "</td>"));
+                	body.append($("<tr>").html("<td>Lambda Node IP</td><td>" + data.ipAddress + "</td>"));
+                	table.append(body);
+                	return table;
+                }
+
+                var renderCode = function() {
+                	var div = $("<div>");
+                	var pre = $("<pre>");
+                	if (eventLog.length > 0) {
+						pre.html("<strong class='c-blue'>Awesome! Event Received</strong>");
+	                	var btn = $("<button type='submit' style='float:right'>").text("Clear").click(function() {
+	                		eventLog = []
+	                		$("#event-div").empty().append(renderCode());
+	                	});
+	                	div.append(btn);
+                	}
+                	pre.append($("<code class='hljs-cdata' data-trim>").text(JSON.stringify(eventLog, null, '\t')));
+                	div.append(pre);
+                	return div;
+                }
+
+                var renderVideo = function(data) {
+                	var div = $("<div class='playerframe'>").html("<strong class='c-yellow'>Wow! Event Received (" + data.clickType + " click)</strong>");
+                	div.append($('<iframe style="border-radius:20px" width="960" height="540" src="https://www.youtube.com/embed/jeOpMAJHgvM?autoplay=1&start=24&end=116" frameborder="0">'));
+                	return div;
+                }
+
+	            IoTEventListener.initialize(function(data) {
+	            	console.log("clicked: " + data.clickType);
+	            	var el;
+	            	eventLog.unshift(data);
+	            	switch (data.clickType) {
+	            		case 'SINGLE':
+			            	el = renderTable(data);
+			            	break;
+		            	case 'LONG':
+			            	el = renderVideo(data);
+			            	break;
+			            default:
+			            	el = renderCode();
+			            	break;
+	            	}
+	            	$("#event-div").empty().append(el);
+	            });
+	            //$("#event-div").empty().append(renderVideo({ "clickType": "LONG" }));
+	          }
+	         );
+		</script>
+	</body>
+</html>
