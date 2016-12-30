@@ -53,8 +53,8 @@
 							<small style="float: right"><a href="https://aws.amazon.com/lambda">- Amazon AWS Lambda</a></small>
 						</p>
 					</div>
+					<br>
 					<div class="c-blue">
-						<br> <br>
 						FaaS Providers
 					</div>
 					<div>
@@ -99,36 +99,38 @@
 						</tbody>
 					</table>
 					<br><br>
-					<p class="fragment" style="border-radius:5px;background:#A40613;color:white;font-weight:bold">Servers är ca 60 ggr dyrare!!!</p>
+					<div class="fragment" style="border-radius:5px;background:#A40613;color:white;font-weight:bold">Servers är ca 60 ggr dyrare!!!</div>
 				</section>
 
 				<!-- Arkitekur -->
-				<section class="full">
+				<section>
 					<h3>Arkitektur - exempel</h3>
-					<div>
+					<div style="float: top;">
 						Serverless är typsikt eventdrivet för Mobil-, Webb- och IoT- backendtjänster.
-						<br><br>
+						<div>
+							<div class="stretch fragment" style="float: left">
+								<small class="c-blue">Skapa tumnagel av bild</small>
+								<div>
+									<img style="border:none;border-radius:10px;margin: 0px auto;" src="images/lamdba-s3-trigger-example.png" />
+								</div>
+							</div>
+							<div class="fragment" style="float: center">
+								<small class="c-blue">Bearbeta en dataström</small>
+								<div>
+									<img style="border:none;border-radius:10px;margin: 0px auto;" src="images/lamdba-kinesis-trigger-example.png" />
+								</div>
+							</div>
+						</div>
+						<p>&nbsp;</p>
 					</div>
 					<div>
-						<div class="stretch fragment" style="float: left">
-							<small class="c-blue">Exempel: Skapa tumnagel av bild</small>
-							<div>
-								<img style="border:none;border-radius:10px" src="images/lamdba-s3-trigger-example.png" />
-							</div>
-						</div>
-						<div class="fragment" style="float: center">
-							<small class="c-blue">Exempel: Bearbeta en dataström</small>
-							<div>
-								<img style="border:none;border-radius:10px" src="images/lamdba-kinesis-trigger-example.png" />
-							</div>
-						</div>
+						<br>
+						<div style="border-radius:5px;background:#434491;color:white;">AWS tillhandahåller 70 fördefinierade blueprints</div>
 					</div>
-					<br>
-					<div style="text-align:center;border-radius:5px;background:#434491;color:white">AWS tillhandahåller 70 olika blueprints</div>
 				</section>
 
 				<!-- IoT Button -->
-				<section  class="full">
+				<section>
 					<section>
 						<h3>Demo - IoT Button</h3>					
 						<div id="event-div">
@@ -181,9 +183,8 @@ IoTEventListener.initialize = function(cb) {
 ...
 	client.subscribe("<mark>iotprocessed</mark>");
 						</code></pre>
-						<div>
-							<img style="border:none;border-radius:5px" src="images/eclipse-paho-logo.png" />
-						</div>
+						<br>
+						<img style="background: #73C3B6;border:none;border-radius:5px;margin: 0px auto;" src="images/eclipse-paho-logo.png" />
 					</section>
 				</section>
 
@@ -192,11 +193,11 @@ IoTEventListener.initialize = function(cb) {
 					<h3>Positiva aspekter (app. arkitektur)</h3>
 					<ul>
 						<li>FaaS är plattformen för micro-service arkitektur</li>
-						<li>En applikationsutvecklare behöver inte hantera aspekter som:</li>
+						<li>Som utvecklare slipper du hantera hantera aspekter som:</li>
 						<ul>
 							<li>CPU, cores</li>
 							<li>Trådar</li>
-							<li>Policy och roller</li>
+							<li>Policies och roller</li>
 							<li>Uppgraderingar</li>
 							<li>Elastisk auto-skalning och lastbalansering</li>
 							<li>Konfiguration</li>
@@ -216,7 +217,7 @@ IoTEventListener.initialize = function(cb) {
 						<!-- <li>Högt på hype-kurvan, dvs. en viss tillnyktring förväntas komma</li> -->
 						<li>Komplex arkitektur som kräver "vassa" DevOps team</li>
 						<li>Risk för så kallade "nanotjänster"</li>
-						<ul style="font-size: 26px">
+						<ul style="font-size: 24px">
 							<li>A nanoservice is a service whose overhead (communications, maintenance, and so on) outweighs its utility</li>
 						</ul>
 						<li>Verktyg och designmönster "saknas" för hantering av en grupp funktioner (applikation/tjänst)</li>
@@ -226,7 +227,7 @@ IoTEventListener.initialize = function(cb) {
 						<li>Säkerhetsrisker, fler frågor som måste besvaras/hanteras</li>
 						<!-- <li>Mer logik på klienten (risk för redundans över kanaler)</li> -->
 						<li>Detaljer (the devil is in the detail)
-						<ul style="font-size: 26px">
+						<ul style="font-size: 24px">
 							<li>Max samtidiga exekveringar är per konto och inte miljö</li>
 							<li>Max exekveringstid (5 min)</li>
 							<li>Latens (startup, dataåtkomst)</li>
@@ -239,12 +240,17 @@ IoTEventListener.initialize = function(cb) {
 
 				<!-- Demo -->
 				<!-- 
-				<section class="full" data-background="images/stephenwhite.jpg" data-state="background-blur-animation">
+				<section data-background="images/stephenwhite.jpg" data-state="background-blur-animation">
+				<section>
 				-->
-				<section class="full">
-					<img style="float:left;border:none;border-radius:5px;" data-src="images/demo.png">
-					<div style="position: absolute; bottom: 0; margin: 10px auto;">
-						<img style="border:none;border-radius:5px;" data-src="images/serverless-logo.png" />
+				<section data-background="images/stephenwhite.jpg" data-state="background-blur-animation">
+					<div>
+						<div style="position: absolute; bottom: 100px; margin: 0px auto;">
+							<img style="border:none;border-radius:5px;" data-src="images/demo.png">
+						</div>
+						<div style="position: absolute; top: 200px; margin: 0px auto;">
+							<img style="border:none;border-radius:5px;" data-src="images/serverless-logo.png" />
+						</div>
 					</div>
 				</section>
 			</div>
@@ -263,9 +269,9 @@ IoTEventListener.initialize = function(cb) {
 			// More info https://github.com/hakimel/reveal.js#configuration
 			$(function() {
 	            Reveal.initialize({
-	            	width: "90%",
-	            	height:"90%",
-	                controls: false,
+				    width: 960,
+				    height: 700,
+				    controls: false,
 	                progress: false,
 					history: true,
 	                center: true,
