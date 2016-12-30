@@ -148,7 +148,7 @@ def ip():
 def lambda_handler(event, context):
     xevent = {
         'title': 'Demo event assembled by lambda python function',
-        'timestamp': str(datetime.datetime.utcnow()),
+        'timestamp': datetime.datetime.utcnow().isoformat(),
         'ipAddress': ip(),
         'serialNumber': event['serialNumber'],
         'batteryVoltage': event['batteryVoltage'],
@@ -220,21 +220,18 @@ IoTEventListener.initialize = function(cb) {
 							<li>A nanoservice is a service whose overhead (communications, maintenance, and so on) outweighs its utility</li>
 						</ul>
 						<li>Verktyg och designmönster "saknas" för hantering av en grupp funktioner (applikation/tjänst)</li>
-						<!--
-						<ul style="font-size: 26px">
-							<li>Lambda erbjuder inget sätt att hantera miljöspecifik konfiguration</li>
-						</ul>
-						-->
 						<!-- <li>Leverantören kontrollerar och styr plattformen</li> -->
 						<li>Inlåsningseffekter på grund av beroenden till såväl plattformsspecifika SDK som stödtjänster</li>
 						<!-- Testbarhet, mock, molnet -->
 						<li>Säkerhetsrisker, fler frågor som måste besvaras/hanteras</li>
 						<!-- <li>Mer logik på klienten (risk för redundans över kanaler)</li> -->
-						<li>AWS SLA (the devil is in the detail)
+						<li>Detaljer (the devil is in the detail)
 						<ul style="font-size: 26px">
 							<li>Max samtidiga exekveringar är per konto och inte miljö</li>
 							<li>Max exekveringstid (5 min)</li>
 							<li>Latens (startup, dataåtkomst)</li>
+							<li>Testbarhet, troligtvis molnet som gäller (utmaningar vad gäller mock-tjänster)</li>
+							<li>Konfiguration för olika miljöer</li>
 							<li>...</li>
 						</ul>
 					</ul>
@@ -295,7 +292,9 @@ IoTEventListener.initialize = function(cb) {
                 	var body = $("<tbody>");
                 	body.append($("<tr>").html("<td>From Device</td><td>" + data.serialNumber + "</td>"));                	
                 	body.append($("<tr>").html("<td>Battery</td><td>" + data.batteryVoltage + "</td>"));
-                	body.append($("<tr>").html("<td>Timestamp (UTC)</td><td>" + data.timestamp + "</td>"));
+                	var localTime = new Date(Date.parse(data.timestamp));
+                	var dateTime = localTime.toLocaleDateString('sv-SE') + " " + localTime.toLocaleTimeString('sv-SE');
+                	body.append($("<tr>").html("<td>Timestamp</td><td class='c-blue'>" + dateTime + "</td>"));
                 	body.append($("<tr>").html("<td>Click Type</td><td>" + data.clickType + "</td>"));
                 	body.append($("<tr>").html("<td>Lambda Node IP</td><td>" + data.ipAddress + "</td>"));
                 	table.append(body);
