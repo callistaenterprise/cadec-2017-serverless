@@ -65,11 +65,11 @@ button {
 
 @-webkit-keyframes blur-animation {
   0% {
-    filter: blur(10px) saturate(.7) brightness(.9) grayscale(100%) opacity(0.1);
+    filter: blur(10px) saturate(10) brightness(200%) grayscale(100%) opacity(0.1);
 
   }
   100% {
-    filter: blur(0px) saturate(1.0) brightness(1.0) grayscale(0%) opacity(1.0);
+    filter: blur(0px) saturate(1) brightness(100%) grayscale(0%) opacity(1.0);
   }
 }
 

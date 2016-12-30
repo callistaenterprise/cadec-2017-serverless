@@ -191,7 +191,8 @@ def lambda_handler(event, context):
 				<section>
 					<h3>Positiva aspekter (app. arkitektur)</h3>
 					<ul>
-						<li>Slipper hantera icke-funktionalitet som ex:</li>
+						<li>FaaS är plattformen för micro-service arkitektur</li>
+						<li>En applikationsutvecklare behöver inte hantera aspekter som:</li>
 						<ul>
 							<li>CPU, cores</li>
 							<li>Trådar</li>
@@ -203,7 +204,6 @@ def lambda_handler(event, context):
 							<li>Säkerhetsaspekter som DDoS etc.</li>
 							<li>Upprätthålla produktionslika test- och stagemiljöer</li>
 						</ul>
-						<li>FaaS är "de enda" plattformarna för micro-service arkitektur</li>
 					</ul>
 					<br><br>
 					<div style="text-align:center;border-radius:5px;background:#434491;color:white">Dvs. mer fokus på funktionalitet!</div>
@@ -214,22 +214,25 @@ def lambda_handler(event, context):
 					<h3>Men...avvakta med "all-in"</h3>
 					<ul style="font-size: 34px">
 						<!-- <li>Högt på hype-kurvan, dvs. en viss tillnyktring förväntas komma</li> -->
-						<li>Komplicerad arkitektur som kräver "vassa" DevOps team</li>
+						<li>Komplex arkitektur som kräver "vassa" DevOps team</li>
 						<li>Risk för så kallade "nanotjänster"</li>
 						<ul style="font-size: 26px">
 							<li>A nanoservice is a service whose overhead (communications, maintenance, and so on) outweighs its utility</li>
 						</ul>
-						<li>Det saknas verktyg och mönster för att paketera och driftsätta en grupp av funktioner (applikation)</li>
+						<li>Verktyg och mönster saknas för paketering och driftsättning av en grupp funktioner (applikation/tjänst)</li>
+						<ul style="font-size: 26px">
+							<li>Lambda erbjuder inget sätt att hantera miljöspecifik konfiguration</li>
+						</ul>
 						<!-- <li>Leverantören kontrollerar och styr plattformen</li> -->
 						<li>Inlåsningseffekter på grund av beroenden till såväl plattformsspecifika SDK som stödtjänster</li>
-						<li>Öppnar upp fler säkerhetsrisker som måste hanteras</li>
+						<li>Säkerhetsrisker, fler som måste besvaras/hanteras</li>
 						<!-- <li>Mer logik på klienten (risk för redundans över kanaler)</li> -->
-						<li>Konfiguration, lambda erbjuder inget sätt att externalisera konfiguration</li>
-						<li>AWS SLA
+						<li>AWS SLA (the devil is in the detail)
 						<ul style="font-size: 26px">
 							<li>Max samtidiga exekveringar är per konto och inte miljö</li>
 							<li>Max exekveringstid (5 min)</li>
-							<li>JVM startup (latens)</li>
+							<li>Latens (startup, dataåtkomst)</li>
+							<li>...</li>
 						</ul>
 					</ul>
 				</section>
@@ -239,9 +242,9 @@ def lambda_handler(event, context):
 				<section class="full" data-background="images/stephenwhite.jpg" data-state="background-blur-animation">
 				-->
 				<section class="full">
-					<h1>&nbsp;&nbsp;&nbsp;DEMO</h1>
+					<img style="float:left;border:none;border-radius:5px;" data-src="images/demo.png">
 					<div style="position: absolute; bottom: 0; margin: 10px auto;">
-						<img style="border:none;border-radius:5px;" src="images/serverless-logo.png" />
+						<img style="border:none;border-radius:5px;" data-src="images/serverless-logo.png" />
 					</div>
 				</section>
 			</div>
