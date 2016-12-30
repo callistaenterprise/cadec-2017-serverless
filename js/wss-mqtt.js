@@ -3,10 +3,6 @@ function IoTEventListener() {}
 
 IoTEventListener.initialize = function(cb) {
 
-    var credentials = { accessKeyId: 'AKIAIEEGFOZMSU5PHIHQ', 
-                        secretAccessKey: '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', 
-                        sessionToken: null };
-
     var requestUrl = SigV4Utils.getSignedUrl('a3k85fof722r8f.iot.eu-west-1.amazonaws.com', 'eu-west-1', credentials);
 
     var clientId = String(Math.random()).replace('.', '');
