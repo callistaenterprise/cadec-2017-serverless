@@ -7,10 +7,10 @@
 		<title>Serverless</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/callista.css">
+		<link rel="stylesheet" href="css/theme/callista.css" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/solarized-light.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -98,7 +98,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<br><br>
+					<br><br><br><br>
 					<div class="fragment" style="border-radius:5px;background:#A40613;color:white;font-weight:bold">Servers är ca 60 ggr dyrare!!!</div>
 				</section>
 
@@ -139,7 +139,7 @@
 					</section>
 					<section>
 						<h3>Python Lambda Code (MQTT)</h3>
-						<pre><code class="hljs" data-trim data-noescape>
+						<pre class="stretch"><code class="python" data-trim data-noescape>
 import <mark>boto3</mark>, json, socket, datetime
 
 client = boto3.client('iot-data', region_name='eu-west-1')
@@ -156,7 +156,10 @@ def lambda_handler(event, context):
         'batteryVoltage': event['batteryVoltage'],
         'clickType': event['clickType']
     }
+
     client.publish(topic='<mark>iotprocessed</mark>', qos=1, payload=json.dumps(xevent))
+    
+    return xevent
 						</code></pre>
 					</section>
 					<section>
@@ -256,8 +259,7 @@ IoTEventListener.initialize = function(cb) {
 			</div>
 		</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.7.15/aws-sdk.min.js" type="text/javascript"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -265,30 +267,34 @@ IoTEventListener.initialize = function(cb) {
 		<script src="js/aws-util.js" type="text/javascript"></script>
 		<script src="js/wss-mqtt.js" type="text/javascript"></script>
 
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
 		<script>
+            Reveal.initialize({
+			    width: 960,
+			    height: 700,
+			    controls: false,
+                progress: false,
+				history: true,
+                center: true,
+				slideNumber: true,
+                transition: 'convex', // none/fade/slide/convex/concave/zoom
+				transitionSpeed: 'slow',
+				// Optional reveal.js plugins
+		        // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+            });
+
 			// More info https://github.com/hakimel/reveal.js#configuration
 			$(function() {
-	            Reveal.initialize({
-				    width: 960,
-				    height: 700,
-				    controls: false,
-	                progress: false,
-					history: true,
-	                center: true,
-					slideNumber: true,
-	                transition: 'convex', // none/fade/slide/convex/concave/zoom
-					transitionSpeed: 'slow',
-					// Optional reveal.js plugins
-	                dependencies: [
-	                            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-								{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-								{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-								{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-	                            { src: 'plugin/zoom-js/zoom.js', async: true },
-	                            { src: 'plugin/notes/notes.js', async: true }
-	                    ]
-                });
-
 
                 var eventLog = []
 
