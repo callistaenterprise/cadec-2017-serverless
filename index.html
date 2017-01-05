@@ -139,7 +139,7 @@
 					</section>
 					<section>
 						<h3>Python Lambda Code (MQTT)</h3>
-						<pre class="stretch"><code class="python" data-trim data-noescape>
+						<pre class="stretch"><code class="hljs" data-trim data-noescape>
 import <mark>boto3</mark>, json, socket, datetime
 
 client = boto3.client('iot-data', region_name='eu-west-1')
@@ -195,17 +195,15 @@ IoTEventListener.initialize = function(cb) {
 				<section>
 					<h3>Positiva aspekter (app. arkitektur)</h3>
 					<ul>
-						<li>FaaS är plattformen för micro-service arkitektur</li>
-						<li>Som utvecklare slipper du hantera hantera aspekter som:</li>
+						<li>FaaS är en micro-service plattform</li>
+						<li>...och som arkitekt/utvecklare slipper man hantera:</li>
 						<ul>
-							<li>CPU, cores</li>
-							<li>Trådar</li>
+							<li>CPU, cores, trådar</li>
 							<li>Policies och roller</li>
-							<li>Uppgraderingar</li>
 							<li>Elastisk auto-skalning och lastbalansering</li>
-							<li>Konfiguration</li>
-							<li>Distribuerad spårning, loggning och instrumentering</li>
-							<li>Säkerhetsaspekter som DDoS etc.</li>
+							<li>Uppgraderingar, discovery och konfiguration</li>
+							<li>Distribuerad loggning, spårning och instrumentering</li>
+							<li>Säkerhetsaspekter som DDoS etc</li>
 							<li>Upprätthålla produktionslika test- och stagemiljöer</li>
 						</ul>
 					</ul>
@@ -223,7 +221,7 @@ IoTEventListener.initialize = function(cb) {
 						<ul style="font-size: 24px">
 							<li>A nanoservice is a service whose overhead (communications, maintenance, and so on) outweighs its utility</li>
 						</ul>
-						<li>Verktyg och designmönster "saknas" för hantering av en grupp funktioner (applikation/tjänst)</li>
+						<li>Etablerade verktyg och designmönster "saknas" för hantering av en grupp funktioner (applikation/tjänst)</li>
 						<!-- <li>Leverantören kontrollerar och styr plattformen</li> -->
 						<li>Inlåsningseffekter på grund av beroenden till såväl plattformsspecifika SDK som stödtjänster</li>
 						<!-- Testbarhet, mock, molnet -->
@@ -259,10 +257,15 @@ IoTEventListener.initialize = function(cb) {
 			</div>
 		</div>
 
-		
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.7.15/aws-sdk.min.js" type="text/javascript"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<script>
+			var log = function(msg) {
+				console.log(new Date().toLocaleString('sv-SE') + " -- " + msg); 
+			}
+		</script>		
 		<script src="js/credentials.js"></script>
 		<script src="js/aws-util.js" type="text/javascript"></script>
 		<script src="js/wss-mqtt.js" type="text/javascript"></script>
@@ -305,8 +308,7 @@ IoTEventListener.initialize = function(cb) {
                 	body.append($("<tr>").html("<td>From Device</td><td>" + data.serialNumber + "</td>"));                	
                 	body.append($("<tr>").html("<td>Battery</td><td>" + data.batteryVoltage + "</td>"));
                 	var localTime = new Date(Date.parse(data.timestamp));
-                	var dateTime = localTime.toLocaleDateString('sv-SE') + " " + localTime.toLocaleTimeString('sv-SE');
-                	body.append($("<tr>").html("<td>Timestamp</td><td class='c-blue'>" + dateTime + "</td>"));
+                	body.append($("<tr>").html("<td>Timestamp</td><td class='c-blue'>" + localTime.toLocaleString('sv-SE') + "</td>"));
                 	body.append($("<tr>").html("<td>Click Type</td><td>" + data.clickType + "</td>"));
                 	body.append($("<tr>").html("<td>Lambda Node IP</td><td>" + data.ipAddress + "</td>"));
                 	table.append(body);
@@ -324,7 +326,7 @@ IoTEventListener.initialize = function(cb) {
 	                	});
 	                	div.append(btn);
                 	}
-                	pre.append($("<code class='hljs-cdata' data-trim>").text(JSON.stringify(eventLog, null, '\t')));
+                	pre.append($("<code class='hljs' data-trim>").text(JSON.stringify(eventLog, null, '\t')));
                 	div.append(pre);
                 	return div;
                 }
@@ -337,7 +339,7 @@ IoTEventListener.initialize = function(cb) {
                 }
 
 	            IoTEventListener.initialize(function(data) {
-	            	console.log("clicked: " + data.clickType);
+	            	log("clicked: " + data.clickType);
 	            	var el;
 	            	eventLog.unshift(data);
 	            	switch (data.clickType) {

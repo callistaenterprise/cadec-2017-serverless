@@ -9,21 +9,21 @@ IoTEventListener.initialize = function(cb) {
     var client = new Paho.MQTT.Client(requestUrl, clientId);
     
 
-    client.onMessageArrived = function (message) {
+    client.onMessageArrived = function(message) {
 
         try {
-            console.log("msg arrived: " +  message.payloadString);
+            log("msg arrived: " +  message.payloadString);
             var data = JSON.parse(message.payloadString);
             cb(data)
         } catch (e) {
-            console.log("error: " + e);
+            log(e);
         }
     };
 
     var connectOptions = {
         onSuccess: function() {
             // connect succeeded
-            console.log("Successfully connected to MQTT with client-id: " + clientId);
+            log("Successfully connected to MQTT with client-id: " + clientId);
             client.subscribe("iotprocessed");
         },
         useSSL: true,
@@ -31,14 +31,14 @@ IoTEventListener.initialize = function(cb) {
         mqttVersion: 4,
         keepAliveInterval: 30,
         onFailure: function(e) {
-            console.log("error: unable to connect " + e);
+            log("error: unable to connect " + e);
         }
     };
 
     client.connect(connectOptions);
 
     client.onConnectionLost = function (responseObject) {
-        console.log("connection lost: " + responseObject.errorMessage);
+        log("connection lost: " + responseObject.errorMessage);
         client.connect(connectOptions);
     };
 
