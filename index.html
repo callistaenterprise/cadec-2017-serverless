@@ -31,6 +31,7 @@
 				<!-- Introduction -->
 				<section>
  					<h1>Serverless</h1>
+ 					<small><i>- är det nya svarta -</i></small>
 	                <p>
 	                    <small>
 	                           	CADEC 2017&nbsp;-&nbsp;<a href="mailto:peter.larsson@callistaenterprise.se">Peter Larsson</a>,&nbsp;<a href="mailto:stephen.white@callistaenterprise.se">Stephen White</a>
@@ -147,14 +148,15 @@ client = boto3.client('iot-data', region_name='eu-west-1')
 def ip():
     return [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
+# copy input event and add some stuff
 def lambda_handler(event, context):
     xevent = {
-        'title': 'Demo event assembled by lambda python function',
-        'timestamp': datetime.datetime.utcnow().isoformat(),
-        'ipAddress': ip(),
         'serialNumber': event['serialNumber'],
         'batteryVoltage': event['batteryVoltage'],
-        'clickType': event['clickType']
+        'clickType': event['clickType'],
+        'title': 'Demo event assembled by lambda python function',
+        'timestamp': datetime.datetime.utcnow().isoformat(),
+        'ipAddress': ip()
     }
 
     client.publish(topic='<mark>iotprocessed</mark>', qos=1, payload=json.dumps(xevent))
@@ -217,7 +219,7 @@ IoTEventListener.initialize = function(cb) {
 					<h3>Men...avvakta med "all-in"</h3>
 					<ul style="font-size: 34px">
 						<!-- <li>Högt på hype-kurvan, dvs. en viss tillnyktring förväntas komma</li> -->
-						<li>Komplex arkitektur som kräver "vassa" DevOps team</li>
+						<li>Komplex kompetensutmanande arkitektur</li>
 						<li>Risk för så kallade "nanotjänster"</li>
 						<ul style="font-size: 24px">
 							<li>A nanoservice is a service whose overhead (communications, maintenance, and so on) outweighs its utility</li>
