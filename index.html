@@ -168,9 +168,9 @@ def lambda_handler(event, context):
 						<h3>Client - Paho MQTT/Websocket</h3>
 						<pre><code class="hljs" data-trim>
 // html page callback, fragments...
-IoTEventListener.initialize(function(data) {
-		console.log("clicked: " + data.clickType);
-		switch (data.clickType) {
+IoTEventListener.initialize(function(event) {
+		console.log("clicked: " + event.clickType);
+		switch (event.clickType) {
 			...
 		}
 	}
@@ -180,10 +180,10 @@ IoTEventListener.initialize(function(data) {
 // client code, fragments...
 IoTEventListener.initialize = function(cb) {
 	var client = new Paho.MQTT.Client(requestUrl, clientId);
-	client.onMessageArrived = function (message) {
+	client.onMessageArrived = function(message) {
 	        console.log("msg arrived: " +  message.payloadString);
-	        var data = JSON.parse(message.payloadString);
-	        cb(data)
+	        var event = JSON.parse(message.payloadString);
+	        cb(event)
 	};
 ...
 	client.subscribe("<mark>iotprocessed</mark>");
