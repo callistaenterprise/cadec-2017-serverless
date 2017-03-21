@@ -126,13 +126,13 @@
 					</div>
 					<div>
 						<br>
-						<div style="border-radius:5px;background:#434491;color:white;">AWS tillhandahåller ~75 fördefinierade blueprints</div>
+						<div style="border-radius:5px;background:#434491;color:white;">AWS tillhandahåller 75 fördefinierade blueprints</div>
 					</div>
 				</section>
 
 				<!-- IoT Button -->
 				<section>
-					<section>
+					<section data-background-image="images/demo.png" data-background-size="250px" data-background-position="top left">
 						<h3 id="demo-title">Demo - IoT Button</h3>					
 						<div id="event-div">
 							<img style="border:none;border-radius:10px" src="images/lamdba-iot-button-trigger-example.png" />
@@ -240,7 +240,7 @@ client.subscribe("<mark>iotprocessed</mark>");
 	</section>
 
 	<section>
-		<section>
+		<section data-background-image="images/serverless-logo.png" data-background-size="250px" data-background-position="top left">
 			<h3>Praktiska erfarenheter - AWS Lambda/IoT</h3>
 			<ul>
 				<li>Använd Serverless Framework</li>
@@ -248,18 +248,20 @@ client.subscribe("<mark>iotprocessed</mark>");
 					<li>Förenklar applikationsprovisionering</li> 
 					<li>Stöd för Amazon, OpenWhisk och Azure</li>
 				</ul>
-				<li>Hitta rätt granularitet på funktioner/moduler</li>
-				<li>RDBMS innebär prestandautmaningar och kräver extra nätadministration (VPC)</li>
-				<li>AWS Kinesis påför latens men är billigare än MQTT topics</li>
+				<li>Hitta rätt granularitet på funktioner och moduler (applikationsstackar)</li>
+				<ul style="font-size: 24px">
+					<li>Generellt vore det önskvärt med mindre enheter</li> 
+				</ul>				
+				<li>Var beredd på att experimentera vad gäller data-management</li>
+				<ul style="font-size: 24px">
+					<li>RDBMS innebär prestandautmaningar och kräver extra nätadministration (VPC)</li> 
+					<li>AWS Kinesis medför 100-600ms latens per meddelande men är billigare än MQTT topics</li>
+				</ul>
 				<li>Serverless Framework, AWS Lambda, API Gateway, Javascript och Node.js fungerar alldeles utmärkt</li>
 			</ul>
-			<div>
-				<br>
-				<img style="height:80px;border:none;border-radius:5px;" data-src="images/serverless-logo.png" />
-			</div>
 		</section>
 		<section data-background-image="images/demo.png" data-background-size="250px" data-background-position="top left">
-		<h3>Deploy description (HTTP API)</h3>
+		<h3>Demo - Serverless Deploy (HTTP API)</h3>
 			<pre><code class="hljs" data-trim data-noescape>
 # serverless.yml
 service: aws-python-simple-http-endpoint
@@ -280,6 +282,20 @@ functions:
           method: get
 		</code></pre>
 	</section>
+</section>
+<section>
+	<h1>The End!</h1>
+</section>
+<section data-markdown>
+	**LÄNKAR**
+		AWS Lambda, IoT, API-GW, S3 (https://aws.amazon.com)
+		Azure (https://azure.microsoft.com/services/functions)
+		Google (https://cloud.google.com/functions)
+		IBM (https://developer.ibm.com/openwhisk)
+		Iron (https://www.iron.io)
+		Webtask (https://webtask.io)
+		MQTT (http://mqtt.org)
+		Serverless Framework (https://serverless.com)
 </section>
 </div>
 </div>
