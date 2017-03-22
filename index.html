@@ -31,6 +31,7 @@
 			<!-- Introduction -->
 			<section>
 				<h1>Serverless</h1>
+				<h2>Architecture</h2>
 				<small><i>- är det nya svarta -</i></small>
 				<p>
 					<small>
@@ -41,7 +42,7 @@
 
 			<!-- Serverless -->
 			<section>
-				<h3>Serverless</h3>
+				<h3>Serverless Architecture</h3>
 				<br>
 				<div>
 					<q cite="https://aws.amazon.com/lambda">
@@ -342,6 +343,7 @@ functions:
 			$(function() {
 
 				var eventLog = []
+				var videoRuns = false
 
 				var renderTable = function(data) {
 					var table = $("<table>");
@@ -384,11 +386,20 @@ functions:
 					log("clicked: " + data.clickType);
 					var el;
 					eventLog.unshift(data);
+
+					if (videoRuns) {
+						$("iframe").each(function() { 
+					        var src= $(this).attr('src');
+					        $(this).attr('src',src);  
+						});
+					     videoRuns = false;
+					}
 					switch (data.clickType) {
 						case 'SINGLE':
 						el = renderTable(data);
 						break;
 						case 'LONG':
+						videoRuns = true
 						el = renderVideo(data);
 						break;
 						default:
