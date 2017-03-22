@@ -349,6 +349,7 @@ functions:
 
 				var eventLog = []
 				var videoRuns = false
+				var bellSnd = new Audio("bell.wav");
 
 				var renderTable = function(data) {
 					var table = $("<table>");
@@ -388,10 +389,10 @@ functions:
 				}
 
 				IoTEventListener.initialize(function(data) {
+					bellSnd.play();
 					log("clicked: " + data.clickType);
 					var el;
 					eventLog.unshift(data);
-
 					if (videoRuns) {
 						$("iframe").each(function() { 
 					        var src= $(this).attr('src');
